@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./conf.d/default.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    image: php:7.4-fpm
+    volumes:
+      - ./php.conf:/usr/local/etc/php-fpm.d/www.conf
+    expose:
+      - 9000

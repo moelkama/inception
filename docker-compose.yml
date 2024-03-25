@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    build: ./nginx/
+    container_name: nginx
+    ports:
+      - 8080:80
+    networks:
+      - inception
+    # volumes:
+    #   - wordpress_vol
+  wordpress:
+    image: wordpress
+    build: ./wordpress/
+    container_name: wordpress
+    expose:
+      - "9000"
+    networks:
+      - inception
+    # volumes:
+    #   - wordpress_vol:/var/www/html/
+
+networks:
+  inception:
+    name: inception
+
+# volumes:
+#   wordpress:
+#     name: wordpress
+#     driver: local
+#     driver_opts:
+#     type: 'none'
+#     o: 'bind'
+#     device: '/nfs/homes/moelkama/Desktop/wordpress'

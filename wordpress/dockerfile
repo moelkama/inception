@@ -1,0 +1,21 @@
+FROM debian:11
+
+RUN apt-get update -y && apt-get upgrade -y
+
+# RUN apt-get install wget
+
+# RUN wget https://wordpress.org/latest.tar.gz -P /var/www/
+# RUN tar -xzvf /var/www/latest.tar.gz
+# RUN /var/www/latest.tar.gz
+
+RUN apt-get install -y php7.4 \
+    php7.4-fpm 
+    # php7.4-mysql\
+    # mariadb-client
+
+EXPOSE 9000/tcp
+EXPOSE 9000/udp
+
+RUN mkdir run/php
+
+CMD ["/usr/sbin/php-fpm7.4", "-F"]
